@@ -103,13 +103,21 @@ public:
 			return;
 		}
 
-		std::string vec;
-		if (!fin.eof())
+		double value;
+		int i = 0;
+		while (!fin.eof())
 		{
-			getline(fin, vec);
-			for (int i = 0, int j = 0; i < vec.size(); i += 2, j++)
-				elements[j] = vec[i];
+			if (i < size)
+			{
+				fin >> value;
+				elements[i] = value;
+			}
+			else
+				break;
+			i++;
+
 		}
+		fin.seekg(0, std::ios::beg);
 		fin.close();
 	}
 
@@ -118,6 +126,21 @@ public:
 		for (int i = 0; i < size; i++)
 			std::cout << elements[i] << " ";
 		std::cout << std::endl;
+	}
+	void outputToFile(std::string path)
+	{
+		std::ofstream fout(path, std::ios::app);
+		if (!fout.is_open())
+		{
+			std::cout << "Ошибка открытия файла\n";
+			return;
+		}
+
+		fout << "\n";
+		for (int i = 0; i < size; i++)
+			fout << elements[i] << " ";
+
+		fout.close();
 	}
 
 
