@@ -92,17 +92,8 @@ public:
 		for (int i = 0; i < size; i++)
 			elements[i] = obj.elements[i];
 	}
-	void fillFromFile(std::string path)
+	void fillFromFile(std::ifstream& fin)
 	{
-		std::ifstream fin;
-		fin.open(path);
-
-		if (!fin.is_open())
-		{
-			std::cout << "Ошибка открытия файла\n";
-			return;
-		}
-
 		double value;
 		int i = 0;
 		while (!fin.eof())
@@ -117,8 +108,6 @@ public:
 			i++;
 
 		}
-		fin.seekg(0, std::ios::beg);
-		fin.close();
 	}
 
 	void printVec()
@@ -127,20 +116,11 @@ public:
 			std::cout << elements[i] << " ";
 		std::cout << std::endl;
 	}
-	void outputToFile(std::string path)
+	void vecOutputToFile(std::ofstream& fout)
 	{
-		std::ofstream fout(path, std::ios::app);
-		if (!fout.is_open())
-		{
-			std::cout << "Ошибка открытия файла\n";
-			return;
-		}
-
 		fout << "\n";
 		for (int i = 0; i < size; i++)
 			fout << elements[i] << " ";
-
-		fout.close();
 	}
 
 

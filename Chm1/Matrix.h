@@ -13,7 +13,10 @@ public:
 		if (_k > size - 1)
 			k = size - 1;
 		else
-			k = _k;
+			if (_k < 1)
+				k = 1;
+			else
+				k = _k;
 
 		a.setSize(size);
 		b.setSize(size);
@@ -75,6 +78,26 @@ public:
 		}
 
 	}
+	void matrFillFromFile(std::string path)
+	{
+		std::ifstream fin;
+		fin.open(path);
+
+		if (!fin.is_open())
+		{
+			std::cout << "Ошибка открытия файла\n";
+			return;
+		}
+
+		a.fillFromFile(fin);
+		b.fillFromFile(fin);
+		c.fillFromFile(fin);
+		p.fillFromFile(fin);
+		q.fillFromFile(fin);
+
+		fin.seekg(0, std::ios::beg);
+		fin.close();
+	}
 
 	void matrPrint()
 	{
@@ -103,6 +126,22 @@ public:
 			}
 		}
 
+	}
+	void matrOutputToFile(std::string path)
+	{
+		std::ofstream fout(path, std::ios::app);
+		if (!fout.is_open())
+		{
+			std::cout << "Ошибка открытия файла\n";
+			return;
+		}
+		a.vecOutputToFile(fout);
+		b.vecOutputToFile(fout);
+		c.vecOutputToFile(fout);
+		p.vecOutputToFile(fout);
+		q.vecOutputToFile(fout);
+
+		fout.close();
 	}
 
 	Matrix matrAdd(Matrix obj)
@@ -196,6 +235,19 @@ public:
 		return result;
 
 
+	}
+
+	Matrix& operator=(const Matrix& obj)
+	{
+		size = obj.size;
+		k = obj.k;
+		a = obj.a;
+		b = obj.b;
+		c = obj.c;
+		p = obj.p;
+		q = obj.q;
+
+		return *this;
 	}
 
 };
