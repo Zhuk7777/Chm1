@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="System.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>

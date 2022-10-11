@@ -3,6 +3,7 @@
 
 class Matrix
 {
+protected:
 	Vector c, a, b, p, q;
 	int size = 0;
 	int k = 0;
@@ -23,6 +24,15 @@ public:
 		c.setSize(size);
 		p.setSize(size);
 		q.setSize(size);
+	}
+
+	int getSizeMatr()
+	{
+		return size;
+	}
+	int getK()
+	{
+		return k;
 	}
 
 	void matrFill ()
@@ -125,6 +135,7 @@ public:
 									std::cout << "  ";
 			}
 		}
+		std::cout << "\n";
 
 	}
 	void matrOutputToFile(std::string path)
