@@ -37,11 +37,11 @@ public:
 		f.printVec();
 	}
 
-	Vector solution()
+	void solution()
 	{
 		double r;
 
-		for (int i = 0; i < size; i++)
+		for (int i = 1; i <= size + 1 - k - 1; i++)//шаг 1
 		{
 			r = 1 / b[i];
 			b[i] = 1;
@@ -53,10 +53,48 @@ public:
 			b[i + 1] = b[i + 1] - r * c[i];
 			f[i + 1] = f[i + 1] - r * f[i];
 
-			if (i = size + 1 - k - 1)//bi пересекает столбец к+1(вектор q)
+			if (i == size + 1 - k - 1)//bi пересекает K+1-ый столбец(вектор q)
 			{
-				for (int j = i; j < 1; j--)
+				q[i] = 1;
+				c[i - 1] = 0;
+				q[i + 1] = 0;
+
+				for (int j = 1; j <=size; j++)
 				{
+					if (j == i)
+						continue;
+					r = q[j];
+					q[j] = 0;
+					//p[j] = p[j] - c[i] * r;
+					f[j] = f[j] - f[i] * r;
+
+				}
+			}
+		}
+
+		for (int i = size; i >= size + 1 - k; i--)//шаг2
+		{
+			r = 1 / b[i];
+			b[i] = 1;
+			a[i] = r * a[i];
+			f[i] = r * f[i];
+
+			r = c[i - 1];
+			c[i - 1] = 0;
+			b[i - 1] = b[i - 1] - r * a[i];
+			f[i - 1] = f[i - 1] - r * f[i];
+
+			if (i == size + 1 - k)//bi пересекает k-ый столбец(вектор p)
+			{
+				p[i] = 1;
+				p[i - 1] = 0;
+				a[i + 1] = 0;
+
+				for (int j = 1; j <=size; j++)
+				{
+					r = p[j];
+					p[j] = 0;
+					f[j] = f[j] - r * f[i];
 
 				}
 			}
