@@ -8,7 +8,7 @@ class System : public Matrix
 public:
 	System(int _size, int _k) :Matrix(_size, _k)
 	{
-		f.setSize(_size);
+		f.setSize(size);
 	}
 
 	void fillVecF()
@@ -56,7 +56,8 @@ public:
 			if (i == size + 1 - k - 1)//bi пересекает K+1-ый столбец(вектор q)
 			{
 				q[i] = 1;
-				c[i - 1] = 0;
+				if (i != 1)
+					c[i - 1] = 0;
 				q[i + 1] = 0;
 
 				for (int j = 1; j <=size; j++)
@@ -88,10 +89,14 @@ public:
 			{
 				p[i] = 1;
 				p[i - 1] = 0;
-				a[i + 1] = 0;
+				if (i != size)
+					a[i + 1] = 0;
 
 				for (int j = 1; j <=size; j++)
 				{
+					if (j == i)
+						continue;
+
 					r = p[j];
 					p[j] = 0;
 					f[j] = f[j] - r * f[i];
