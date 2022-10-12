@@ -248,17 +248,4 @@ public:
 
 	}
 
-	Matrix& operator=(const Matrix& obj)
-	{
-		size = obj.size;
-		k = obj.k;
-		a = obj.a;
-		b = obj.b;
-		c = obj.c;
-		p = obj.p;
-		q = obj.q;
-
-		return *this;
-	}
-
 };

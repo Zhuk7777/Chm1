@@ -7,11 +7,18 @@ int main()
 	setlocale(0, "rus");
 
 	std::string path = "MyFile.txt", path2 = "MyFile2.txt";
-	System a(12, 11);//при втором значении=1/12 ошибки
+
+	System a(7, 2), b(7, 2);
+	Vector x(7);
+
 	a.fillVecFFromFile(path2);
 	a.matrFillFromFile(path);
-	a.solution();
+	b.matrFillFromFile(path);
+
 	a.matrPrint();
-	a.printVecF();
+	x = a.solution();
+	a.matrPrint();
+	b.multipliByVectorOnRight(x, x.getSize());
+	b.matrPrint();
 	return 0;
 }

@@ -37,7 +37,7 @@ public:
 		f.printVec();
 	}
 
-	void solution()
+	void systemTransformation()
 	{
 		double r;
 
@@ -104,5 +104,25 @@ public:
 				}
 			}
 		}
+
+	}
+
+	Vector solution()
+	{
+		systemTransformation();
+		Vector x(size);
+		x[k] = f[size + 1 - k];
+
+		for (int i = k + 1; i <= size; i++)
+		{
+			x[i] = f[size + 1 - i] - c[size + 1 - i] * x[i - 1];
+		}
+
+		for (int i = k - 1; i >= 1; i--)
+		{
+			x[i] = f[size + 1 - i] - a[size + 1 - i] * x[i + 1];
+		}
+
+		return x;
 	}
 };
