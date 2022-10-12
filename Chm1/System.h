@@ -66,7 +66,7 @@ public:
 						continue;
 					r = q[j];
 					q[j] = 0;
-					//p[j] = p[j] - c[i] * r;
+					p[j] = p[j] - c[i] * r;
 					f[j] = f[j] - f[i] * r;
 
 				}

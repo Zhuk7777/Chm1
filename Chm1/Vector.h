@@ -142,7 +142,7 @@ public:
 	{
 		double result=0;
 		for (int i = 0; i < size; i++)
-			result += obj.elements[i] * this->elements[i];
+			result += obj.elements[i] * elements[i];
 		return result;
 	}
 
