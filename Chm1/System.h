@@ -5,6 +5,26 @@ class System : public Matrix
 {
 	Vector f;
 
+	void accordance(int i)
+	{
+		//для k-го столбца
+		if (i == size + 1 - k)
+			b[i] = p[i];
+		if (i == size - k)
+			c[i] = p[i];
+		if (i == size + 2 - k)
+			a[i] = p[i];
+
+		//для к+1-го столбца
+		if (i == size - k)
+			b[i] = q[i];
+		if (i == size - k - 1)
+			c[i] = q[i];
+		if (i == size + 1 - k)
+			a[i] = q[i];
+
+	}
+
 public:
 	System(int _size, int _k) :Matrix(_size, _k)
 	{
@@ -39,26 +59,31 @@ public:
 
 	void systemTransformation()
 	{
-		double r;
+		double r = 0.0;
 
 		for (int i = 1; i <= size + 1 - k - 1; i++)//шаг 1
 		{
 			r = 1 / b[i];
 			b[i] = 1;
 			c[i] = r * c[i];
+			q[i] = r * q[i];
+			p[i] = r * p[i];
 			f[i] = r * f[i];
+
+			accordance(i);
 
 			r = a[i + 1];
 			a[i + 1] = 0;
 			b[i + 1] = b[i + 1] - r * c[i];
+			q[i + 1] = q[i + 1] - r * q[i];
+			p[i + 1] = p[i + 1] - r * p[i];
 			f[i + 1] = f[i + 1] - r * f[i];
+
+			accordance(i);
+
 
 			if (i == size + 1 - k - 1)//bi пересекает K+1-ый столбец(вектор q)
 			{
-				q[i] = 1;
-				if (i != 1)
-					c[i - 1] = 0;
-				q[i + 1] = 0;
 
 				for (int j = 1; j <=size; j++)
 				{
@@ -69,6 +94,8 @@ public:
 					p[j] = p[j] - c[i] * r;
 					f[j] = f[j] - f[i] * r;
 
+					accordance(j);
+
 				}
 			}
 		}
@@ -78,19 +105,23 @@ public:
 			r = 1 / b[i];
 			b[i] = 1;
 			a[i] = r * a[i];
+			q[i] = r * q[i];
+			p[i] = r * p[i];
 			f[i] = r * f[i];
+
+			accordance(i);
 
 			r = c[i - 1];
 			c[i - 1] = 0;
 			b[i - 1] = b[i - 1] - r * a[i];
+			p[i - 1] = p[i - 1] - r * p[i];
+			q[i - 1] = q[i - 1] - r * q[i];
 			f[i - 1] = f[i - 1] - r * f[i];
+
+			accordance(i);
 
 			if (i == size + 1 - k)//bi пересекает k-ый столбец(вектор p)
 			{
-				p[i] = 1;
-				p[i - 1] = 0;
-				if (i != size)
-					a[i + 1] = 0;
 
 				for (int j = 1; j <=size; j++)
 				{
@@ -100,6 +131,8 @@ public:
 					r = p[j];
 					p[j] = 0;
 					f[j] = f[j] - r * f[i];
+
+					accordance(j);
 
 				}
 			}
