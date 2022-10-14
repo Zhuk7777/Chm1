@@ -8,8 +8,8 @@ int main()
 
 	std::string path = "MyFile.txt", path2 = "MyFile2.txt";
 
-	System a(4, 1), b(4, 1);
-	Vector x(4),f(4);
+	System a(7, 2), b(7, 2);
+	Vector x(7),f(7);
 
 	a.fillVecFFromFile(path2);
 	a.matrFillFromFile(path);
@@ -21,9 +21,6 @@ int main()
 
 	x = a.solution();
 	a.matrPrint();
-	std::cout << "\n";
-
-	x.printVec();
 	std::cout << "\n";
 
 	f = b.multipliByVectorOnRight(x, x.getSize());

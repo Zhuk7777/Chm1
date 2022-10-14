@@ -61,7 +61,7 @@ public:
 	{
 		double r = 0.0;
 
-		for (int i = 1; i <= size + 1 - k - 1; i++)//шаг 1
+		for (int i = 1; i <= size - k; i++)//шаг 1
 		{
 			r = 1 / b[i];
 			b[i] = 1;
@@ -79,13 +79,13 @@ public:
 			p[i + 1] = p[i + 1] - r * p[i];
 			f[i + 1] = f[i + 1] - r * f[i];
 
-			accordance(i);
+			accordance(i + 1);
 
 
-			if (i == size + 1 - k - 1)//bi пересекает K+1-ый столбец(вектор q)
+			if (i == size - k)//bi пересекает K+1-ый столбец(вектор q)
 			{
 
-				for (int j = 1; j <=size; j++)
+				for (int j = 1; j <= size; j++)
 				{
 					if (j == i)
 						continue;
@@ -118,7 +118,7 @@ public:
 			q[i - 1] = q[i - 1] - r * q[i];
 			f[i - 1] = f[i - 1] - r * f[i];
 
-			accordance(i);
+			accordance(i + 1);
 
 			if (i == size + 1 - k)//bi пересекает k-ый столбец(вектор p)
 			{
