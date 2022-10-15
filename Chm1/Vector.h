@@ -1,8 +1,8 @@
 #pragma once
-#include<ctime>
 #include<iostream>
 #include<string>
 #include<fstream>
+#include<cmath>
 
 class Vector
 {
@@ -62,9 +62,9 @@ public:
 
 		return max;
 	}
+
 	void randomFill(int a,int b)
 	{
-		srand(time(0));
 		for (int i = 0; i < size; i++)
 		{
 			if (a > 0)
@@ -128,7 +128,7 @@ public:
 	{
 		Vector result(size);
 		for (int i = 0; i < size; i++)
-			result.elements[i] = obj.elements[i] + this->elements[i];
+			result.elements[i] = obj.elements[i] + elements[i];
 		return result;
 
 	}
@@ -136,7 +136,8 @@ public:
 	{
 		Vector result(size);
 		for (int i = 0; i < size; i++)
-			result.elements[i] = obj.elements[i] - this->elements[i];
+			result.elements[i] = obj.elements[i] - elements[i];
+		return result;
 	}
 	double scalarMultiplication(Vector obj)
 	{

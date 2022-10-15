@@ -108,6 +108,22 @@ public:
 		fin.seekg(0, std::ios::beg);
 		fin.close();
 	}
+	void matrFillRandom(int left, int right)
+	{
+		a.randomFill(left, right);
+		b.randomFill(left, right);
+		c.randomFill(left, right);
+		p.randomFill(left, right);
+		q.randomFill(left, right);
+
+		p[size + 1 - k] = b[size + 1 - k];
+		p[size - k] = c[size - k];
+		p[size + 2 - k] = a[size + 2 - k];
+
+		q[size - k] = b[size - k];
+		q[size - k - 1] = c[size - k - 1];
+		q[size + 1 - k] = a[size + 1 - k];
+	}
 
 	void matrPrint()
 	{
@@ -135,8 +151,6 @@ public:
 									std::cout << "  ";
 			}
 		}
-		std::cout << "\n";
-
 	}
 	void matrOutputToFile(std::string path)
 	{

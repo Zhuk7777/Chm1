@@ -51,6 +51,10 @@ public:
 		fin.close();
 
 	}
+	void fillVecFFromVec(const Vector& obj)
+	{
+		f = obj;
+	}
 
 	void printVecF()
 	{
@@ -63,6 +67,8 @@ public:
 
 		for (int i = 1; i <= size - k; i++)//шаг 1
 		{
+			if (b[i] == 0.0)
+				throw "Деление на ноль!\n";
 			r = 1 / b[i];
 			b[i] = 1;
 			c[i] = r * c[i];
@@ -102,6 +108,8 @@ public:
 
 		for (int i = size; i >= size + 1 - k; i--)//шаг2
 		{
+			if (b[i] == 0.0)
+				throw "Деление на ноль!\n";
 			r = 1 / b[i];
 			b[i] = 1;
 			a[i] = r * a[i];

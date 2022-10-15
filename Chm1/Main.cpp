@@ -1,30 +1,57 @@
 #include"Matrix.h"
 #include"Vector.h"
 #include"System.h"
+#include<ctime>
 
 int main()
 {
 	setlocale(0, "rus");
-
 	std::string path = "MyFile.txt", path2 = "MyFile2.txt";
 
-	System a(7, 2), b(7, 2);
-	Vector x(7),f(7);
+	std::cout << "Введите размерность матрицы\n";
+	int size;
+	std::cin >> size;
 
-	a.fillVecFFromFile(path2);
-	a.matrFillFromFile(path);
-	b.matrFillFromFile(path);
+	std::cout << "Введите значение k\n";
+	int k;
+	std::cin >> k;
+	System syst(size,k);
 
-	a.matrPrint();
-	std::cout << "\n";
-	a.printVecF();
+	std::cout << "Введите границы промежутка из которого будут генерироваться значения элементов матрицы и вектора X\n";
+	int left, right;
+	std::cin >> left;
+	std::cin >> right;
+	Vector xBefore(size);
+	Vector xNow(size);
+	Vector diff(size);
+	Vector f(size);
 
-	x = a.solution();
-	a.matrPrint();
-	std::cout << "\n";
 
-	f = b.multipliByVectorOnRight(x, x.getSize());
+	std::cout << "Введите количество проверок\n";
+	int count;
+	std::cin >> count;
 
-	f.printVec();
+	srand(time(NULL));
+	for (int i = 0; i < count; i++)
+	{
+		syst.matrFillRandom(left, right);
+		xBefore.randomFill(left, right);
+		f = syst.multipliByVectorOnRight(xBefore, size);
+		syst.fillVecFFromVec(f);
+
+		try {
+			xNow = syst.solution();
+		}
+		catch(const char* ex)
+		{
+			std::cout << ex << "\n";
+		}
+
+		diff = xNow.differenceVec(xBefore);
+		xBefore.printVec();
+		xNow.printVec();
+		std::cout << "Погрешность равна " << diff.normOfVec() << "\n\n";
+	}
+
 	return 0;
 }
