@@ -38,7 +38,7 @@ int main()
 		xBefore.randomFill(left, right);
 		f = syst.multipliByVectorOnRight(xBefore, size);
 		syst.fillVecFFromVec(f);
-
+		
 		try {
 			xNow = syst.solution();
 		}
@@ -46,7 +46,7 @@ int main()
 		{
 			std::cout << ex << "\n";
 		}
-
+		
 		diff = xNow.differenceVec(xBefore);
 		xBefore.printVec();
 		xNow.printVec();

@@ -151,6 +151,7 @@ public:
 									std::cout << "  ";
 			}
 		}
+		std::cout << "\n";
 	}
 	void matrOutputToFile(std::string path)
 	{

@@ -150,6 +150,9 @@ public:
 
 	Vector solution()
 	{
+		Vector a2(size), b2(size), c2(size), p2(size), q2(size), f2(size);
+		a2 = a; b2 = b; c2 = c; p2 = p; q2 = q; f2 = f;
+
 		systemTransformation();
 		Vector x(size);
 		x[k] = f[size + 1 - k];
@@ -163,6 +166,9 @@ public:
 		{
 			x[i] = f[size + 1 - i] - a[size + 1 - i] * x[i + 1];
 		}
+
+
+		a = a2; b = b2; c = c2; p = p2; q = q2; f = f2;
 
 		return x;
 	}
