@@ -8,34 +8,38 @@ int main()
 	setlocale(0, "rus");
 	std::string path = "MyFile.txt", path2 = "MyFile2.txt";
 
-	std::cout << "Введите размерность матрицы\n";
-	int size;
-	std::cin >> size;
+	int size = 8;
 
 	std::cout << "Введите значение k\n";
 	int k;
 	std::cin >> k;
 	System syst(size,k);
 
-	std::cout << "Введите границы промежутка из которого будут генерироваться значения элементов матрицы и вектора X\n";
-	int left, right;
-	std::cin >> left;
-	std::cin >> right;
 	Vector xBefore(size);
 	Vector xNow(size);
 	Vector diff(size);
 	Vector f(size);
 
-
-	std::cout << "Введите количество проверок\n";
-	int count;
-	std::cin >> count;
-
+	std::cout << "Размер матрицы     Погрешность\n";
 	srand(time(NULL));
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < 8; i++)
 	{
-		syst.matrFillRandom(left, right);
-		xBefore.randomFill(left, right);
+		System syst(size, k);
+
+		Vector xBefore(size);
+		Vector xNow(size);
+		Vector diff(size);
+		Vector f(size);
+
+		syst.randomFillVecA(20, 25);
+		syst.randomFillVecB(300, 400);
+		syst.randomFillVecC(20, 25);
+		syst.randomFillVecP(30, 40);
+		syst.randomFillVecQ(30, 40);
+
+		//syst.matrPrint();
+
+		xBefore.randomFill(4, 100);
 		f = syst.multipliByVectorOnRight(xBefore, size);
 		syst.fillVecFFromVec(f);
 		
@@ -48,9 +52,11 @@ int main()
 		}
 		
 		diff = xNow.differenceVec(xBefore);
-		xBefore.printVec();
-		xNow.printVec();
-		std::cout << "Погрешность равна " << diff.normOfVec() << "\n\n";
+		//xBefore.printVec();
+		//xNow.printVec();
+		//std::cout << "Погрешность равна " << diff.normOfVec() << "\n\n";
+		std::cout << "    " << size << "        " << diff.normOfVec() << "\n";
+		size *= 2;
 	}
 
 	return 0;

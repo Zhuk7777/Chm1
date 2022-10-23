@@ -65,15 +65,30 @@ public:
 
 	void randomFill(int a,int b)
 	{
+		int random;
+
 		for (int i = 0; i < size; i++)
 		{
 			if (a > 0)
+			{
 				elements[i] = a + rand() % (b + 1 - a);
+				random= a + rand() % (b + 1 - a);
+			}
 			else
 				if (b > 0)
+				{
 					elements[i] = a + rand() % (abs(a) + 1 + b);
+					random= a + rand() % (abs(a) + 1 + b);
+				}
 				else
+				{
 					elements[i] = a + rand() % (abs(a) + b - 1);
+					random = a + rand() % (abs(a) + b - 1);
+				}
+			elements[i] /= random;
+			if (elements[i] < a)
+				elements[i] += rand() % (int)abs(b) / 3 + abs(a);
+
 		}
 
 	}

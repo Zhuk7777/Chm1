@@ -125,6 +125,67 @@ public:
 		q[size + 1 - k] = a[size + 1 - k];
 	}
 
+	void randomFillVecA(int left, int right)
+	{
+		a.randomFill(left, right);
+
+		p[size + 1 - k] = b[size + 1 - k];
+		p[size - k] = c[size - k];
+		p[size + 2 - k] = a[size + 2 - k];
+
+		q[size - k] = b[size - k];
+		q[size - k - 1] = c[size - k - 1];
+		q[size + 1 - k] = a[size + 1 - k];
+	}
+
+	void randomFillVecB(int left, int right)
+	{
+		b.randomFill(left, right);
+		p[size + 1 - k] = b[size + 1 - k];
+		p[size - k] = c[size - k];
+		p[size + 2 - k] = a[size + 2 - k];
+
+		q[size - k] = b[size - k];
+		q[size - k - 1] = c[size - k - 1];
+		q[size + 1 - k] = a[size + 1 - k];
+	}
+
+	void randomFillVecC(int left, int right)
+	{
+		c.randomFill(left, right);
+		p[size + 1 - k] = b[size + 1 - k];
+		p[size - k] = c[size - k];
+		p[size + 2 - k] = a[size + 2 - k];
+
+		q[size - k] = b[size - k];
+		q[size - k - 1] = c[size - k - 1];
+		q[size + 1 - k] = a[size + 1 - k];
+	}
+
+	void randomFillVecP(int left, int right)
+	{
+		p.randomFill(left, right);
+		p[size + 1 - k] = b[size + 1 - k];
+		p[size - k] = c[size - k];
+		p[size + 2 - k] = a[size + 2 - k];
+
+		q[size - k] = b[size - k];
+		q[size - k - 1] = c[size - k - 1];
+		q[size + 1 - k] = a[size + 1 - k];
+	}
+
+	void randomFillVecQ(int left, int right)
+	{
+		q.randomFill(left, right);
+		p[size + 1 - k] = b[size + 1 - k];
+		p[size - k] = c[size - k];
+		p[size + 2 - k] = a[size + 2 - k];
+
+		q[size - k] = b[size - k];
+		q[size - k - 1] = c[size - k - 1];
+		q[size + 1 - k] = a[size + 1 - k];
+	}
+
 	void matrPrint()
 	{
 		for (int i = 1; i <= size; i++)
